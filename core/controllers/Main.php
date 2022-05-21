@@ -2,7 +2,7 @@
 
 namespace core\controllers;
 
-use core\classes\Functions;
+use core\classes\Store;
 
 class Main
 {
@@ -12,7 +12,7 @@ class Main
       'title' => 'Home',
     ];
 
-    Functions::layout([
+    Store::layout([
       'html/head', 'home', 'html/foot'
     ], $data);
   }
