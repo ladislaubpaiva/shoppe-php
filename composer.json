@@ -1,0 +1,18 @@
+{
+  "name": "ladislaubpaiva/shoppe",
+  "description": "My Online Store with php",
+  "type": "project",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Ladislau Paiva",
+      "email": "ladislaubpaiva@hotmail.com"
+    }
+  ],
+  "require": {},
+  "autoload": {
+    "psr-4": {
+      "core\\": "core/"
+    }
+  }
+}
