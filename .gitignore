@@ -1,0 +1,8 @@
+/vendor/
+/.vscode/
+/node_modules/
+*.temp
+*.lock
+.env
+notes.md
+config.php
