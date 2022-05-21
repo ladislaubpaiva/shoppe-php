@@ -2,11 +2,19 @@
 
 namespace core\controllers;
 
+use core\classes\Functions;
+
 class Main
 {
   public function home()
   {
-    echo "Home";
+    $data = [
+      'title' => 'Home',
+    ];
+
+    Functions::layout([
+      'html/head', 'home', 'html/foot'
+    ], $data);
   }
   public function store()
   {
