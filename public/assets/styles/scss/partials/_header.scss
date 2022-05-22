@@ -1,0 +1,76 @@
+@import './variables';
+@import './mixins';
+
+#header {
+  margin: auto;
+  padding-top: 4rem;
+  padding-bottom: 1rem;
+  .container {
+    height: 42px;
+    @include wrapper;
+    @include flex(space-between, center);
+    a img {
+      display: block;
+      height: 100%;
+    }
+  }
+  .nav-bar {
+    height: inherit;
+    @include flex($align: center);
+    ul {
+      height: 100%;
+      list-style: none;
+      @include flex($align: center);
+      li {
+        height: inherit;
+        @include flex($align: center);
+      }
+    }
+    &__links {
+      gap: 4rem;
+      padding-right: 1.2rem;
+    }
+    &__link {
+      border-bottom: 1px solid transparent;
+      transition: border 0.3s;
+      &.active,
+      &:active {
+        border-bottom: 1px solid $black;
+      }
+      a {
+        font-size: 1rem;
+        color: $black;
+        &:hover {
+          color: $accent;
+        }
+      }
+    }
+    .divisor {
+      width: 1px;
+      height: 21px;
+      background-color: $black;
+    }
+    &__icons {
+      gap: 2rem;
+      padding-left: 1.2rem;
+    }
+
+    &__icon {
+      border-bottom: 1px solid transparent;
+      transition: border 0.3s;
+      &.active,
+      &:active {
+        border-bottom: 1px solid $black;
+      }
+      a {
+        height: 100%;
+        @include flex($align: center);
+        color: $black;
+        font-size: 1.2rem;
+        &:hover {
+          color: $accent;
+        }
+      }
+    }
+  }
+}

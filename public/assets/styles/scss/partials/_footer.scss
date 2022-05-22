@@ -1,0 +1,83 @@
+@import './variables';
+@import './mixins';
+
+#footer {
+  bottom: 0;
+  width: 100%;
+  margin: auto;
+  position: absolute;
+  padding: 0 0 5.75rem;
+  .container {
+    @include wrapper;
+    padding-top: 3.12rem;
+    border-top: 1px solid $darkGray;
+    .main-content {
+      @include flex(space-between, center);
+      margin-bottom: 3rem;
+      .nav-bar {
+        &__links {
+          gap: 2.6rem;
+          height: 100%;
+          list-style: none;
+          @include flex($align: center);
+        }
+        &__link a {
+          color: $darkGray;
+          transition: color 0.3s;
+          text-transform: uppercase;
+          &:hover {
+            color: $black;
+          }
+        }
+      }
+
+      form {
+        width: 100%;
+        max-width: 400px;
+        border-bottom: 1px solid $darkGray;
+        @include flex(space-between, center);
+        input {
+          flex: 1;
+          outline: none;
+          border: none;
+          padding: 12px 1px;
+        }
+        button {
+          border: none;
+          font-size: 1.4rem;
+          color: $darkGray;
+          background: transparent;
+          @include flex($align: center);
+          cursor: pointer;
+          transition: color 0.3s;
+          text-transform: uppercase;
+          &:hover {
+            color: $black;
+          }
+        }
+      }
+    }
+    .content {
+      @include flex(space-between, center);
+      &__copy {
+        color: $black;
+        a {
+          color: $darkGray;
+        }
+      }
+      &__social-links {
+        @include flex($align: center);
+        gap: 1.2rem;
+        ion-icon {
+          font-size: 1.3rem;
+          color: $darkGray;
+          cursor: pointer;
+          transition: color 0.3s;
+          &:hover {
+            color: $black;
+          }
+        }
+      }
+    }
+  }
+}
