@@ -70,13 +70,16 @@ main {
       }
       label {
         gap: 8px;
+        cursor: pointer;
         margin-top: 1rem;
+        width: fit-content;
         @include flex(flex-start, center);
       }
-      input[type='submit'] {
+      .submit {
         border: none;
         color: $white;
         padding: 1rem;
+        cursor: pointer;
         font-weight: 700;
         margin: 4.25rem 0 1rem;
         border-radius: 10px;
@@ -84,8 +87,12 @@ main {
         text-transform: uppercase;
       }
       a {
+        color: $darkGray;
         display: block;
         text-align: center;
+        &:hover {
+          color: $black;
+        }
       }
       margin-bottom: 2rem;
     }
