@@ -11,7 +11,7 @@
     <title><?= $title . ' - ' . APP_NAME ?></title>
   <?php endif; ?>
   <link rel="shortcut icon" href="public/assets/images/favicon.svg" type="image/x-icon">
-  <link rel="stylesheet" href="public/assets/styles/<?= lcfirst($title) ?>.css" type="text/css" />
+  <link rel="stylesheet" href="public/assets/styles/<?= $style ?>.css" type="text/css" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 

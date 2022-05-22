@@ -10,30 +10,66 @@ class Main
   {
     $data = [
       'title' => 'Home',
+      'style' => 'home',
     ];
 
     Store::layout([
       'html/head', 'home', 'html/foot'
     ], $data);
   }
-  public function store()
+  public function shop()
   {
-    echo "Store";
+    $data = [
+      'title' => 'Shop',
+      'style' => 'shop',
+    ];
+
+    Store::layout([
+      'html/head', 'shop', 'html/foot'
+    ], $data);
   }
   public function blog()
   {
-    echo "Blog";
+    $data = [
+      'title' => 'Blog',
+      'style' => 'blog',
+    ];
+
+    Store::layout([
+      'html/head', 'blog', 'html/foot'
+    ], $data);
   }
   public function ourStory()
   {
-    echo "Our store";
+    $data = [
+      'title' => 'Our Story',
+      'style' => 'our-story',
+    ];
+
+    Store::layout([
+      'html/head', 'our-story', 'html/foot'
+    ], $data);
   }
-  public function account()
+  public function cart()
   {
-    echo "Account";
+    $data = [
+      'title' => 'Cart',
+      'style' => 'cart',
+    ];
+
+    Store::layout([
+      'html/head', 'cart', 'html/foot'
+    ], $data);
   }
   public function notFound()
   {
-    echo "404";
+    $data = [
+      'title' => 'Not Found',
+      'style' => '404',
+    ];
+
+    Store::layout([
+      'html/head', '404', 'html/foot'
+    ], $data);
   }
 }

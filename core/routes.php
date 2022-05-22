@@ -2,19 +2,22 @@
 
 $routes = [
   'home' => 'main@home',
-  'store' => 'main@store',
+  'shop' => 'main@shop',
   'blog' => 'main@blog',
   'our-story' => 'main@ourStory',
   '404' => 'main@notFound',
-  'account' => 'main@account',
-  'cart' => 'store@cart',
-  'wishlist' => 'store@wishList',
+  'cart' => 'main@cart',
+  //Account
+  'account' => 'account@account',
+  'wishlist' => 'account@wishList',
+  'login' => 'account@account',
+  'logout' => 'account@wishList',
 ];
 
 $page = 'home';
 
 if (isset($_GET['page'])) {
-  $page = !key_exists($_GET['page'], $routes) ? 'home' : $_GET['page'];
+  $page = !key_exists($_GET['page'], $routes) ? '404' : $_GET['page'];
 }
 
 $parts = explode('@', $routes[$page]);
