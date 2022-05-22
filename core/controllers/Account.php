@@ -8,6 +8,10 @@ class Account
 {
   public function account()
   {
+    if (!Store::isLogged()) {
+      $this->login();
+      return;
+    }
     $data = [
       'title' => 'My Account',
       'style' => 'account',
@@ -19,6 +23,10 @@ class Account
   }
   public function wishList()
   {
+    if (!Store::isLogged()) {
+      $this->login();
+      return;
+    }
     $data = [
       'title' => 'Wish List',
       'style' => 'wishlist',
@@ -28,10 +36,11 @@ class Account
       'html/head', 'wishlist', 'html/foot'
     ], $data);
   }
-  public function login()
+  protected function login()
   {
     $data = [
-      'title' => 'login',
+      'title' => 'My Account',
+      'style' => 'login',
     ];
 
     Store::layout([

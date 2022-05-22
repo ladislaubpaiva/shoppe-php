@@ -4,8 +4,9 @@
   margin-right: auto;
   padding: 0 1rem;
 }
-@mixin flex($jus: unset, $align: unset) {
+@mixin flex($jus: unset, $align: unset, $dir: unset) {
   display: flex;
   justify-content: $jus;
   align-items: $align;
+  flex-direction: $dir;
 }

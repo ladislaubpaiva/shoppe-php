@@ -1,0 +1,96 @@
+@import './partials/global';
+@import './partials/header';
+@import './partials/mixins';
+///*Login Form
+
+main {
+  padding-top: 8rem;
+  .container {
+    @include wrapper;
+    @include flex(center, center, column);
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 4rem;
+      font-weight: 500;
+    }
+    .menu-opts {
+      gap: 5px;
+      height: 60px;
+      width: 500px;
+      padding: 5px;
+      @include flex(center, center);
+      background-color: $lightGray;
+      margin-bottom: 6rem;
+      border-radius: 10px;
+      &__sign,
+      &__register {
+        flex: 1;
+        height: 100%;
+        text-align: center;
+        line-height: 50px;
+        font-size: 1.25rem;
+        &:hover {
+          cursor: pointer;
+          background-color: $gray;
+          border-radius: 10px;
+        }
+        &.active {
+          background-color: $white;
+          border-radius: 10px;
+          box-shadow: 1px 1px 4px rgba($color: $black, $alpha: 0.25);
+        }
+      }
+    }
+    .form {
+      width: 500px;
+      gap: 2px;
+      overflow-x: hidden;
+      @include flex();
+    }
+    form {
+      width: 500px;
+      flex-shrink: 0;
+      @include flex($dir: column);
+      fieldset {
+        gap: 3rem;
+        border: none;
+        @include flex($dir: column);
+        input {
+          height: 40px;
+          border: none;
+          outline: none;
+          padding-left: 2px;
+          font-size: 1rem;
+          border-bottom: 1px solid $gray;
+          transition: all 0.3s;
+          &:focus {
+            border-bottom: 1px solid $darkGray;
+          }
+        }
+      }
+      label {
+        gap: 8px;
+        margin-top: 1rem;
+        @include flex(flex-start, center);
+      }
+      input[type='submit'] {
+        border: none;
+        color: $white;
+        padding: 1rem;
+        font-weight: 700;
+        margin: 4.25rem 0 1rem;
+        border-radius: 10px;
+        background-color: $black;
+        text-transform: uppercase;
+      }
+      a {
+        display: block;
+        text-align: center;
+      }
+      margin-bottom: 2rem;
+    }
+  }
+}
+
+//!Login Form
+@import './partials/footer';

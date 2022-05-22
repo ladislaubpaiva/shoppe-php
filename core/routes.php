@@ -10,8 +10,6 @@ $routes = [
   //Account
   'account' => 'account@account',
   'wishlist' => 'account@wishList',
-  'login' => 'account@account',
-  'logout' => 'account@wishList',
 ];
 
 $page = 'home';

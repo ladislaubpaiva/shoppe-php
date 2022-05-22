@@ -6,3 +6,9 @@
   box-sizing: border-box;
   font-family: $primaryFont;
 }
+body {
+  width: 100vw;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}

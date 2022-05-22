@@ -14,4 +14,8 @@ class Store
     //Show View
     foreach ($structures as $structure) include("../core/views/$structure.php");
   }
+  public static function isLogged()
+  {
+    return isset($_SESSION['client']);
+  }
 }
