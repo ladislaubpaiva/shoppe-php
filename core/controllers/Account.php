@@ -9,7 +9,8 @@ class Account
   public function account()
   {
     $data = [
-      'title' => 'Not Found',
+      'title' => 'Account',
+      'style' => 'account',
     ];
 
     Store::layout([
@@ -19,7 +20,8 @@ class Account
   public function wishList()
   {
     $data = [
-      'title' => 'Not Found',
+      'title' => 'Wish List',
+      'style' => 'wishlist',
     ];
 
     Store::layout([
@@ -33,7 +35,7 @@ class Account
     ];
 
     Store::layout([
-      'html/head', '404', 'html/foot'
+      'html/head', 'login', 'html/foot'
     ], $data);
   }
 }
