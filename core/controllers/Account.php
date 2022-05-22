@@ -9,7 +9,7 @@ class Account
   public function account()
   {
     $data = [
-      'title' => 'Account',
+      'title' => 'My Account',
       'style' => 'account',
     ];
 

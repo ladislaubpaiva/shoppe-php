@@ -6,8 +6,9 @@
   padding-top: 4rem;
   padding-bottom: 1rem;
   .container {
-    height: 42px;
+    height: 60px;
     @include wrapper;
+    border-bottom: 1px solid $gray;
     @include flex(space-between, center);
     a img {
       display: block;
@@ -31,11 +32,12 @@
       padding-right: 1.2rem;
     }
     &__link {
-      border-bottom: 1px solid transparent;
+      border-bottom: 2px solid transparent;
       transition: border 0.3s;
       &.active,
-      &:active {
-        border-bottom: 1px solid $black;
+      &:active,
+      &:hover {
+        border-bottom: 2px solid $accent;
       }
       a {
         font-size: 1rem;
@@ -56,11 +58,12 @@
     }
 
     &__icon {
-      border-bottom: 1px solid transparent;
+      border-bottom: 2px solid transparent;
       transition: border 0.3s;
       &.active,
-      &:active {
-        border-bottom: 1px solid $black;
+      &:active,
+      &:hover {
+        border-bottom: 2px solid $accent;
       }
       a {
         height: 100%;
