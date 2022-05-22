@@ -36,14 +36,15 @@
       &.active,
       &:active,
       &:hover {
+        cursor: pointer;
         border-bottom: 2px solid $accent;
+      }
+      &:hover a {
+        color: $accent;
       }
       a {
         font-size: 1rem;
         color: $black;
-        &:hover {
-          color: $accent;
-        }
       }
     }
     .divisor {
@@ -62,16 +63,17 @@
       &.active,
       &:active,
       &:hover {
+        cursor: pointer;
         border-bottom: 2px solid $accent;
+      }
+      &:hover a {
+        color: $accent;
       }
       a {
         height: 100%;
         @include flex($align: center);
         color: $black;
         font-size: 1.2rem;
-        &:hover {
-          color: $accent;
-        }
       }
     }
   }
