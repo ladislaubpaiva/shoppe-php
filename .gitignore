@@ -3,6 +3,8 @@
 /node_modules/
 *.temp
 *.lock
+*.log
 .env
 notes.md
 config.php
+/public/assets/images/png
