@@ -12,6 +12,7 @@ class Account
       $this->login();
       return;
     }
+
     $data = [
       'title' => 'My Account',
       'style' => 'account',
@@ -36,15 +37,40 @@ class Account
       'html/head', 'wishlist', 'html/foot'
     ], $data);
   }
-  protected function login()
+  private function register()
   {
-    $data = [
-      'title' => 'My Account',
-      'style' => 'login',
-    ];
+    if ($_SERVER['REQUEST_METHOD'] != 'POST') {
+      $this->login();
+    }
+    echo "registo";
+  }
+  private function signIn()
+  {
+    if ($_SERVER['REQUEST_METHOD'] != 'POST') {
+      $this->login();
+    }
+    echo "login";
+  }
+  private function verify()
+  {
+    if (!isset($_POST["t"])) {
+      return false;
+    }
+    if ($_POST["t"] == "login") $this->signIn();
+    elseif ($_POST["t"] == "register") $this->register();
+    else return false;
+  }
+  private function login()
+  {
+    if ($this->verify() === false) {
+      $data = [
+        'title' => 'My Account',
+        'style' => 'login',
+      ];
 
-    Store::layout([
-      'html/head', 'login', 'html/foot'
-    ], $data);
+      Store::layout([
+        'html/head', 'login', 'html/foot'
+      ], $data);
+    }
   }
 }

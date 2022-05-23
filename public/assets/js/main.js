@@ -4,12 +4,16 @@ document.querySelectorAll('.menu-opts div').forEach((e) => {
     const key = e.getAttribute('data-opt');
     document.querySelector('.menu-opts div.active').classList.remove('active');
     e.classList.add('active');
+    const toggleForm = (last, next) => {
+      document.querySelector(last).style.display = 'none';
+      document.querySelector(last).style.order = '1';
+      document.querySelector(next).style.display = 'flex';
+      document.querySelector(next).style.order = '0';
+    };
     if (key === '0') {
-      document.querySelector('#register').style.display = 'none';
-      document.querySelector('#login').style.display = 'flex';
+      toggleForm('#register', '#login');
     } else {
-      document.querySelector('#login').style.display = 'none';
-      document.querySelector('#register').style.display = 'flex';
+      toggleForm('#login', '#register');
     }
   });
 });

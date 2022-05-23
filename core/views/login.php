@@ -8,7 +8,8 @@
       <div class="menu-opts__register" data-opt="1">Register</div>
     </div>
     <div class="form">
-      <form action="" id="login">
+      <form action="?page=account" method="POST" id="login">
+        <input type="hidden" name="t" value="login" />
         <fieldset>
           <input type="email" name="email" id="email" placeholder="Email" data="email|required" />
           <input type="text" name="passwd" id="passwd" placeholder="Password" data="min=8|required|pwd" />
@@ -19,7 +20,8 @@
         <input type="submit" value="Sign in" class="submit" />
         <a href="">Have you forgotten your password?</a>
       </form>
-      <form action="" id="register">
+      <form action="?page=account" method="POST" id="register">
+        <input type="hidden" name="t" value="register" />
         <fieldset>
           <input type="email" name="email" id="email" placeholder="Email" data-sec="email|required" />
           <input type="text" name="passwd" id="passwd" placeholder="Password" data-sec="min=8|required|pwd" />
