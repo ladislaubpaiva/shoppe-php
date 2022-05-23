@@ -67,9 +67,11 @@ const FormValidator = {
     const errorElement = document.createElement('div');
     errorElement.classList.add('error');
     errorElement.innerHTML = `<ion-icon name="close-circle-outline"></ion-icon> ${input.getAttribute('id')} ${error}`;
+    document.querySelector('.showErrors').style.display = 'block';
     document.querySelector('.showErrors').append(errorElement);
   },
   clearErrors: () => {
+    document.querySelector('.showErrors').style.display = 'none';
     const errorElements = document.querySelectorAll('.error');
     for (let i = 0; i < errorElements.length; i++) {
       errorElements[i].remove();

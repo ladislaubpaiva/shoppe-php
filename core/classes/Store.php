@@ -18,4 +18,10 @@ class Store
   {
     return isset($_SESSION['client']);
   }
+  public static function hashGenerator($numCharacters = 12)
+  {
+    //Create Hash
+    $chars = '01234567890123456789abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    return substr(str_shuffle($chars), 0, $numCharacters);
+  }
 }

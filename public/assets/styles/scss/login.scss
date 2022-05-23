@@ -46,6 +46,9 @@ main {
       gap: 2px;
       overflow-x: hidden;
       @include flex();
+      #register {
+        display: none;
+      }
     }
     form {
       width: 500px;
@@ -76,7 +79,6 @@ main {
         @include flex(flex-start, center);
       }
       .submit {
-        border: none;
         color: $white;
         padding: 1rem;
         cursor: pointer;
@@ -84,7 +86,14 @@ main {
         margin: 4.25rem 0 1rem;
         border-radius: 10px;
         background-color: $black;
+        border: 3px solid $white;
         text-transform: uppercase;
+        transition: color 0.3s, background 0.3s;
+        &:hover {
+          color: $black;
+          background-color: $white;
+          border: 3px solid $black;
+        }
       }
       a {
         color: $darkGray;

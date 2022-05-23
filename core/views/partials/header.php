@@ -39,3 +39,16 @@
     </nav>
   </div>
 </header>
+<?php if (!isset($_SESSION['error'])) : ?>
+  <div class="showErrors">
+  </div>
+<?php endif; ?>
+<?php if (isset($_SESSION['error'])) : ?>
+  <div class="showErrors php">
+    <div class="error">
+      <ion-icon name="close-circle-outline"></ion-icon>
+      <?= $_SESSION['error'] ?>
+      <?php unset($_SESSION['error']) ?>
+    </div>
+  </div>
+<?php endif; ?>

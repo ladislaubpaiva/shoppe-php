@@ -1,0 +1,44 @@
+@import './partials/global';
+@import './partials/header';
+@import './partials/mixins';
+///*Confirm Page
+
+main {
+  padding-top: 8rem;
+  .container {
+    @include wrapper;
+    @include flex(center, center, column);
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 4rem;
+      font-weight: 500;
+    }
+    .buttons {
+      gap: 2rem;
+      padding: 20px;
+      width: 350px;
+      margin-bottom: 4rem;
+      @include flex(center, center);
+      a {
+        flex: 1;
+        color: $white;
+        padding: 1rem;
+        font-weight: 700;
+        border-radius: 10px;
+        text-align: center;
+        background-color: $black;
+        border: 3px solid $white;
+        text-transform: uppercase;
+        transition: color 0.3s, background 0.3s;
+        &:hover {
+          color: $black;
+          background-color: $white;
+          border: 3px solid $black;
+        }
+      }
+    }
+  }
+}
+
+//!Confirm Page
+@import './partials/footer';

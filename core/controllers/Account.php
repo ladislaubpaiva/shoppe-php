@@ -2,6 +2,7 @@
 
 namespace core\controllers;
 
+use core\classes\Database;
 use core\classes\Store;
 
 class Account
@@ -37,40 +38,87 @@ class Account
       'html/head', 'wishlist', 'html/foot'
     ], $data);
   }
-  private function register()
+  public function verify()
   {
-    if ($_SERVER['REQUEST_METHOD'] != 'POST') {
-      $this->login();
+    $ctr = new Main();
+    if (Store::isLogged()) {
+      $ctr->notFound();
+      return;
     }
-    echo "registo";
-  }
-  private function signIn()
-  {
     if ($_SERVER['REQUEST_METHOD'] != 'POST') {
-      $this->login();
-    }
-    echo "login";
-  }
-  private function verify()
-  {
-    if (!isset($_POST["t"])) {
-      return false;
+      $ctr->notFound();
+      return;
     }
     if ($_POST["t"] == "login") $this->signIn();
     elseif ($_POST["t"] == "register") $this->register();
-    else return false;
+  }
+  private function register()
+  {
+    function testInput($d)
+    {
+      $d = trim($d);
+      $d = strtolower($d);
+      $d = stripslashes($d);
+      $d = htmlspecialchars($d);
+      return $d;
+    }
+    $email = testInput($_POST['email']);
+    $passwd = testInput($_POST['passwd']);
+    //*Validate email and passwd
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      $_SESSION['error'] = "Invalid email format";
+      $this->login();
+      return;
+    }
+    if ($passwd !== testInput($_POST['confirm-passwd'])) {
+      $_SESSION['error'] = 'Passwords are not the same';
+      $this->login();
+      return;
+    }
+    //?=========================
+    $db = new Database();
+    $params = [
+      ':email' => $email
+      // ':passwd' => $passwd,
+    ];
+    $res = $db->select("SELECT email FROM clients WHERE email = :email", $params);
+    if (count($res) != 0) {
+      $_SESSION['error'] = 'An account with this email already exists';
+      $this->login();
+      return;
+    }
+    $purl = Store::hashGenerator();
+
+    $params = [
+      ":email" => $email,
+      ":passwd" => password_hash($passwd, PASSWORD_DEFAULT),
+      ":purl" => $purl,
+    ];
+    echo $_SERVER["HTTP_ORIGIN"] . "/public?page=confirm&purl=" . $purl;
+    $db->insert('INSERT INTO clients (email, passwd, purl) VALUES (:email, :passwd, :purl)', $params);
+  }
+  public function confirm()
+  {
+    $data = [
+      'title' => 'Confirm Account',
+      'style' => 'confirm',
+    ];
+    Store::layout([
+      'html/head', 'confirm', 'html/foot'
+    ], $data);
+  }
+  private function signIn()
+  {
+    echo $_POST;
   }
   private function login()
   {
-    if ($this->verify() === false) {
-      $data = [
-        'title' => 'My Account',
-        'style' => 'login',
-      ];
-
-      Store::layout([
-        'html/head', 'login', 'html/foot'
-      ], $data);
-    }
+    $data = [
+      'title' => 'My Account',
+      'style' => 'login',
+    ];
+    Store::layout([
+      'html/head', 'login', 'html/foot'
+    ], $data);
   }
 }
