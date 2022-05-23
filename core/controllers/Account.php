@@ -4,6 +4,7 @@ namespace core\controllers;
 
 use core\classes\Database;
 use core\classes\Store;
+use core\models\Clients;
 
 class Account
 {
@@ -54,48 +55,30 @@ class Account
   }
   private function register()
   {
-    function testInput($d)
-    {
-      $d = trim($d);
-      $d = strtolower($d);
-      $d = stripslashes($d);
-      $d = htmlspecialchars($d);
-      return $d;
-    }
-    $email = testInput($_POST['email']);
-    $passwd = testInput($_POST['passwd']);
-    //*Validate email and passwd
+    //?=========================
+    $email = Clients::testInput($_POST['email']);
+    $passwd = Clients::testInput($_POST['passwd']);
+
+    // //*Validate email and passwd
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
       $_SESSION['error'] = "Invalid email format";
       $this->login();
       return;
     }
-    if ($passwd !== testInput($_POST['confirm-passwd'])) {
+    if ($passwd !== Clients::testInput($_POST['confirm-passwd'])) {
       $_SESSION['error'] = 'Passwords are not the same';
       $this->login();
       return;
     }
-    //?=========================
-    $db = new Database();
-    $params = [
-      ':email' => $email
-      // ':passwd' => $passwd,
-    ];
-    $res = $db->select("SELECT email FROM clients WHERE email = :email", $params);
-    if (count($res) != 0) {
+    if (Clients::emailExists($email)) {
       $_SESSION['error'] = 'An account with this email already exists';
       $this->login();
       return;
     }
-    $purl = Store::hashGenerator();
 
-    $params = [
-      ":email" => $email,
-      ":passwd" => password_hash($passwd, PASSWORD_DEFAULT),
-      ":purl" => $purl,
-    ];
-    echo $_SERVER["HTTP_ORIGIN"] . "/public?page=confirm&purl=" . $purl;
-    $db->insert('INSERT INTO clients (email, passwd, purl) VALUES (:email, :passwd, :purl)', $params);
+    $purl = Clients::createClient($email, $passwd);
+
+    $link_curl = APP_HOSTNAME . "/public?page=confirm&purl=" . $purl;
   }
   public function confirm()
   {
