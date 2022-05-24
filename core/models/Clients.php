@@ -16,6 +16,7 @@ class Clients
     $input = htmlspecialchars($input);
     return $input;
   }
+  //Register
   public static function emailExists($email)
   {
     $db = new Database();
@@ -63,5 +64,27 @@ class Clients
     $db->update('UPDATE clients SET purl = :purl, active = :active, updated_at = NOW() WHERE id = :id', $params);
 
     return true;
+  }
+  //Login
+  public static function clientLogin($email, $passwd)
+  {
+    $db = new Database();
+
+    $params = [
+      ":email" => $email
+    ];
+
+    $res = $db->select('SELECT * FROM clients WHERE email = :email AND active = 1 AND deleted_at IS NULL', $params);
+
+    if (count($res) != 1) {
+      return false;
+    }
+
+    $user = $res[0];
+    if (!password_verify($passwd, $user->passwd)) {
+      return false;
+    } else {
+      return $user;
+    }
   }
 }

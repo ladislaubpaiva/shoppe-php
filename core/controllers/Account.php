@@ -5,6 +5,7 @@ namespace core\controllers;
 use core\classes\Store;
 use core\models\Clients;
 use core\classes\ConfirmMailer;
+use Socket;
 
 class Account
 {
@@ -41,6 +42,11 @@ class Account
   }
   public function verify()
   {
+    if (isset($_GET['logout'])) {
+      $this->logout();
+      Store::redirect('home');
+      return;
+    }
     $ctr = new Main();
     if (Store::isLogged()) {
       $ctr->notFound();
@@ -62,6 +68,16 @@ class Account
     // //*Validate email and passwd
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
       $_SESSION['error'] = "Invalid email format";
+      Store::redirect('account');
+      return;
+    }
+    if (empty($passwd)) {
+      $_SESSION['error'] = 'Error with password';
+      Store::redirect('account');
+      return;
+    }
+    if (strlen($passwd) < 8) {
+      $_SESSION['error'] = 'Password Field Needs To Be At Least 8 Characters';
       Store::redirect('account');
       return;
     }
@@ -127,7 +143,31 @@ class Account
   }
   private function signIn()
   {
-    echo $_POST;
+    $email = Clients::testInput($_POST['email']);
+    $passwd = Clients::testInput($_POST['passwd']);
+
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      $_SESSION['error'] = "Invalid email format";
+      Store::redirect('account');
+      return;
+    }
+    if (!Clients::emailExists($email)) {
+      $_SESSION['error'] = 'Email or password is incorrect';
+      Store::redirect('account');
+      return;
+    }
+
+    $res = Clients::clientLogin($email, $passwd);
+
+    if (is_bool($res)) {
+      $_SESSION['error'] = 'Email or password is incorrect';
+      Store::redirect('account');
+      return;
+    } else {
+      $_SESSION['client'] = $res->id;
+      Store::redirect('account');
+    }
   }
   private function login()
   {
@@ -138,5 +178,9 @@ class Account
     Store::layout([
       'html/head', 'login', 'html/foot'
     ], $data);
+  }
+  private function logout()
+  {
+    unset($_SESSION['client']);
   }
 }

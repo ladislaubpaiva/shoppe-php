@@ -12,7 +12,7 @@
         <input type="hidden" name="t" value="login" />
         <fieldset>
           <input type="email" name="email" id="email" placeholder="Email" data-sec="email|required" />
-          <input type="password" name="passwd" id="passwd" placeholder="Password" data-sec="min=8|required|pwd" />
+          <input type="password" name="passwd" id="password" placeholder="Password" data-sec="required|pwd" />
           <label>
             <input type="checkbox" name="remember" id="remember" value="yes" />Remember me
           </label>
@@ -24,8 +24,8 @@
         <input type="hidden" name="t" value="register" />
         <fieldset>
           <input type="email" name="email" id="email" placeholder="Email" data-sec="email|required" />
-          <input type="password" name="passwd" id="passwd" placeholder="Password" data-sec="min=8|required|pwd" />
-          <input type="password" name="confirm-passwd" id="confirm-passwd" placeholder="Confirm Password" data-sec="min=8|required|pwd" />
+          <input type="password" name="passwd" id="password" placeholder="Password" data-sec="min=8|required|pwd" />
+          <input type="password" name="confirm-passwd" id="confirm-password" placeholder="Confirm Password" data-sec="min=8|required|pwd" />
         </fieldset>
         <input type="submit" value="Register" class="submit" />
       </form>
