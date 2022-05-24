@@ -43,12 +43,23 @@
   <div class="showErrors">
   </div>
 <?php endif; ?>
-<?php if (isset($_SESSION['error'])) : ?>
+<?php if (isset($_SESSION['error']) || isset($_SESSION['msg'])) : ?>
   <div class="showErrors php">
-    <div class="error">
-      <ion-icon name="close-circle-outline"></ion-icon>
-      <?= $_SESSION['error'] ?>
-      <?php unset($_SESSION['error']) ?>
-    </div>
+    <?php if (isset($_SESSION['error'])) : ?>
+      <div class="error">
+        <ion-icon name="close-circle-outline"></ion-icon>
+        <?= $_SESSION['error'] ?>
+      </div>
+    <?php endif; ?>
+    <?php if (isset($_SESSION['msg'])) : ?>
+      <div class="info">
+        <ion-icon name="information-circle-outline"></ion-icon>
+        <?= $_SESSION['msg'] ?>
+      </div>
+    <?php endif; ?>
+    <?php
+    unset($_SESSION['error']);
+    unset($_SESSION['msg'])
+    ?>
   </div>
 <?php endif; ?>

@@ -2,9 +2,9 @@
 
 namespace core\controllers;
 
-use core\classes\Database;
 use core\classes\Store;
 use core\models\Clients;
+use core\classes\ConfirmMailer;
 
 class Account
 {
@@ -78,7 +78,15 @@ class Account
 
     $purl = Clients::createClient($email, $passwd);
 
-    $link_curl = APP_HOSTNAME . "/public?page=confirm&purl=" . $purl;
+    $res = ConfirmMailer::sendConfirmMail($email, $purl);
+
+    if ($res === true) {
+      $_SESSION['msg'] = 'Message has been sent to your email address';
+      $this->confirm();
+    } else {
+      $_SESSION['msg'] = 'Message could not be sent';
+      $this->login();
+    }
   }
   public function confirm()
   {
