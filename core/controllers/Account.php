@@ -76,6 +76,8 @@ class Account
       return;
     }
 
+    //*Create Personal URL for confirm email
+
     $purl = Clients::createClient($email, $passwd);
 
     $res = ConfirmMailer::sendConfirmMail($email, $purl);
@@ -84,7 +86,7 @@ class Account
       $_SESSION['msg'] = 'Message has been sent to your email address';
       $this->confirm();
     } else {
-      $_SESSION['msg'] = 'Message could not be sent';
+      $_SESSION['error'] = 'Message could not be sent to your email address';
       $this->login();
     }
   }
