@@ -10,6 +10,8 @@ $routes = [
   //Account
   'account' => 'account@account',
   'wishlist' => 'account@wishList',
+  'verify' => 'account@verify',
+  'confirm' => 'account@confirm',
 ];
 
 $page = 'home';

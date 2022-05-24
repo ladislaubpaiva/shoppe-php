@@ -59,19 +59,18 @@ class Database
     $result = null;
     $this->turnOn();
     try {
+      $execute = $this->connection->prepare($sql);
       if (!empty($params)) {
-        $execute = $this->connection->prepare($sql);
         $execute->execute($params);
-        $result = $execute->fetch(PDO::FETCH_CLASS);
       } else {
-        $execute = $this->connection->prepare($sql);
         $execute->execute();
-        $result = $execute->fetch(PDO::FETCH_CLASS);
       }
+      $result = $execute->fetchAll(PDO::FETCH_CLASS);
     } catch (PDOException $e) {
       return false;
     }
     $this->turnOff();
+    return $result;
   }
   public function update($sql, $params = null)
   {
