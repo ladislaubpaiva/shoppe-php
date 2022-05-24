@@ -62,17 +62,17 @@ class Account
     // //*Validate email and passwd
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
       $_SESSION['error'] = "Invalid email format";
-      $this->login();
+      Store::redirect('account');
       return;
     }
     if ($passwd !== Clients::testInput($_POST['confirm-passwd'])) {
       $_SESSION['error'] = 'Passwords are not the same';
-      $this->login();
+      Store::redirect('account');
       return;
     }
     if (Clients::emailExists($email)) {
       $_SESSION['error'] = 'An account with this email already exists';
-      $this->login();
+      Store::redirect('account');
       return;
     }
 
@@ -83,15 +83,40 @@ class Account
     $res = ConfirmMailer::sendConfirmMail($email, $purl);
 
     if ($res === true) {
-      $_SESSION['msg'] = 'Message has been sent to your email address';
-      $this->confirm();
+      $_SESSION['msg'] = 'A confirmation email has been sent to your email address';
+      Store::redirect('account');
     } else {
-      $_SESSION['error'] = 'Message could not be sent to your email address';
-      $this->login();
+      $_SESSION['error'] = 'A confirmation email could not be sent to your email address';
+      Store::redirect('account');
     }
   }
   public function confirm()
   {
+    $ctr = new Main();
+    if (Store::isLogged()) {
+      $ctr->notFound();
+      return;
+    }
+    if (!$_GET['purl']) {
+      $ctr->notFound();
+      return;
+    }
+
+    $purl = $_GET['purl'];
+
+    if (strlen($purl) != 12) {
+      $ctr->notFound();
+      return;
+    }
+
+    $res = Clients::validateEmail($purl);
+
+    if ($res === true) {
+      $_SESSION['info'] = 'Account has been successfully confirmed';
+    } else {
+      $_SESSION['error'] = 'Link invalid or has already been confirmed';
+    }
+
     $data = [
       'title' => 'Confirm Account',
       'style' => 'confirm',

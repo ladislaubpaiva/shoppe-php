@@ -4,6 +4,7 @@ namespace core\models;
 
 use core\classes\Database;
 use core\classes\Store;
+use core\controllers\Main;
 
 class Clients
 {
@@ -39,5 +40,28 @@ class Clients
     $db->insert('INSERT INTO clients (email, passwd, purl) VALUES (:email, :passwd, :purl)', $params);
 
     return $purl;
+  }
+  public static function validateEmail($purl)
+  {
+    $db = new Database();
+    $params = [
+      ':purl' => $purl,
+    ];
+
+    $res = $db->select('SELECT * FROM clients WHERE purl = :purl', $params);
+
+    if (count($res) != 1) {
+      return false;
+    }
+
+    $params = [
+      ':id' => $res[0]->id,
+      ':purl' => NULL,
+      ':active' => 1,
+    ];
+
+    $db->update('UPDATE clients SET purl = :purl, active = :active, updated_at = NOW() WHERE id = :id', $params);
+
+    return true;
   }
 }

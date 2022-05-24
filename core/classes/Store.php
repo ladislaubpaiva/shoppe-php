@@ -24,4 +24,8 @@ class Store
     $chars = '01234567890123456789abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ';
     return substr(str_shuffle($chars), 0, $numCharacters);
   }
+  public static function redirect($route = '')
+  {
+    header('Location: ' . APP_HOSTNAME . '?page=' . $route);
+  }
 }
