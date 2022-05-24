@@ -1,3 +1,43 @@
 @import './partials/global';
 @import './partials/header';
+//?SHOP Page
+main {
+  padding-top: 6rem;
+}
+.container {
+  @include wrapper;
+  h1 {
+    width: 100%;
+    font-weight: 500;
+  }
+  .shop {
+    @include flex;
+    gap: 3rem;
+    .filters-container {
+      width: 262px;
+    }
+    .products__area {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, 300px);
+      justify-content: center;
+      gap: 4.4rem 1.6rem;
+      .product {
+        &__img {
+          width: 300px;
+          height: 300px;
+        }
+        &__name {
+          font-size: 1.25rem;
+        }
+        &__price {
+          font-size: 1.25rem;
+          color: $accent;
+        }
+      }
+    }
+  }
+}
+
+//!SHOP Page
 @import './partials/footer';

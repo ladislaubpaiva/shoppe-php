@@ -20,7 +20,7 @@ class Main
   public function shop()
   {
     $data = [
-      'title' => 'Shop',
+      'title' => 'Shop The Latest',
       'style' => 'shop',
     ];
 
