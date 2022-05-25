@@ -9,9 +9,12 @@ class Main
 {
   public function home()
   {
+    $productsList = Products::listAvailableProducts();
+
     $data = [
       'title' => 'Home',
       'style' => 'home',
+      'products' => $productsList,
     ];
 
     Store::layout([
