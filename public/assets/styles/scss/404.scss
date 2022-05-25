@@ -1,3 +1,33 @@
 @import './partials/global';
 @import './partials/header';
+
+main {
+  .container {
+    height: calc(100vh - 380px);
+    @include wrapper;
+    @include flex(center, center, column);
+    .heading h1 {
+      text-transform: uppercase;
+    }
+    .message {
+      margin: 1.4rem 0 4rem;
+      color: $darkGray;
+      text-align: center;
+      font-size: 1.2rem;
+    }
+    .button {
+      font-weight: 700;
+      color: $black;
+      padding: 1rem 3rem;
+      border: 1px solid $black;
+      border-radius: 4px;
+      transition: background 0.3s;
+      &:hover {
+        color: $white;
+        background-color: $black;
+      }
+    }
+  }
+}
+
 @import './partials/footer';
