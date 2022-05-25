@@ -3,6 +3,7 @@
 namespace core\controllers;
 
 use core\classes\Store;
+use core\models\Products;
 
 class Main
 {
@@ -19,9 +20,26 @@ class Main
   }
   public function shop()
   {
+    if (isset($_POST['q'])) {
+      $productsList = Products::searchAvailableProducts($_POST['q']);
+    } else {
+      $productsList = Products::listAvailableProducts();
+    }
+    //todo Query the products list by filters
+    // if (isset($_POST['filters'])) {
+    //   $color = $_POST['color'];
+    //   $category = $_POST['category'];
+    //   $sort = $_POST['sort'];
+    //   if (!empty($color) || !empty($category) || !empty($sort))
+    //     $productsList = Products::listFiltersProducts($color, $category, $sort);
+    // } else {
+    //   $productsList = Products::listAvailableProducts();
+    // }
+
     $data = [
       'title' => 'Shop The Latest',
       'style' => 'shop',
+      'products' => $productsList,
     ];
 
     Store::layout([

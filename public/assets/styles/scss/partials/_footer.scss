@@ -5,8 +5,10 @@
   bottom: 0;
   width: 100%;
   margin: auto;
-  position: relative;
+  height: 255px;
+  position: absolute;
   padding: 0 0 5.75rem;
+  background-color: $white;
   .container {
     @include wrapper;
     padding-top: 3.12rem;
